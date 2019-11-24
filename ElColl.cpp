@@ -2,9 +2,7 @@
 // Created by kwoodle on 11/2/19.
 //
 
-#include "ElColl.h"
 #include <iostream>
-#include <sstream>
 #include <ktrade/Ksql.h>
 #include <ktrade/Util.h>
 #include <map>
@@ -12,12 +10,9 @@
 #include <algorithm>
 
 using namespace std;
-//using StateData = map<string, pair<int, int>>;
 using StateData = multimap<int, pair<int, string>>;
 
-//using StateData = map<string, tuple<int,int>>;
 int main() {
-//    bool do_build{true};
     bool do_build{true};       // does apportion table need to be built?
     bool do_test(true);        // test if apportion table is ok
     const string service = "localhost";
@@ -73,9 +68,8 @@ int main() {
         total_pop = res0->getInt("population");
         total_reps = res0->getInt("reps");
     }
-    int total_electors = total_reps + 100;
+//    int total_electors = total_reps + 100;
     float reps_per_pop{float(total_reps) / total_pop};
-//    string sql{"select state, population, reps from apportion"};
     const string sql{R"%%(
 select t1.code, t2.state, t2.population, t2.reps from state_names as t1
 right join apportion as t2 on t1.state = t2.state order by population desc;
@@ -105,25 +99,6 @@ right join apportion as t2 on t1.state = t2.state order by population desc;
             ecollstrm << code << " " << ipop << "\t\t" << reps << "\t\t" << reps_deserved << "\t\t" << reps_excess
                       << endl;
         }
-//        continue;
     }
-//    using SData = map<int, tuple<float, string, float>>;
-//    using SData = vector<pair<string, tuple<float, int, float>>>;
-//    SData sdata;
-//    for (auto s:states) {
-//        string nm{scodes[s.second.second]};
-    //       if (nm != "") {
-//        remember states.emplace(ipop, make_pair(reps, state));
-//          float rep_pop{float(s.second.first) * reps_per_pop};
-//            float rep_pop{float(s.first) * reps_per_pop};
-//            auto rep_act{s.second.first};
-//            float rep_excess{float(rep_act) - rep_pop};
-//            float rep_effective(float(rep_act) + rep_excess);
-//            sdata.emplace(make_pair())
-//            cout<<nm<<" "<<rep_excess<<" "<<rep_act<<" "<<rep_effective<<endl;
-//            ecollstrm<<nm<<" "<<rep_excess<<" "<<rep_act<<" "<<rep_effective<<endl;
-//            sdata.push_back(make_pair(nm, make_tuple(rep_excess, rep_act, rep_effective)));
-//        }
-//    }
     return 0;
 }

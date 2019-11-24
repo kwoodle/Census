@@ -17,9 +17,15 @@ add_executable(Geoid Geoid.cpp Census.h)
 target_link_libraries(Geoid ${Boost_LIBRARIES})
 target_link_libraries(Geoid Ktrd)
 
-add_executable(ElectColl ElColl.cpp ElColl.h ecoll.gplt)
+add_executable(ElectColl ElColl.cpp ecoll.gplt)
 target_link_libraries(ElectColl ${Boost_LIBRARIES})
 target_link_libraries(ElectColl Ktrd)
+
+add_executable(CreatePopInfile CreatePopInfile.cpp)
+target_link_libraries(CreatePopInfile Ktrd)
+
+add_executable(CreateOver18 CreateOver18.cpp)
+target_link_libraries(CreateOver18 Ktrd)
 
 #add_custom_target(PlotEcoll elcoll.gplt)
 

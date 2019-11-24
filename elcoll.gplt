@@ -7,39 +7,51 @@
 
 set term qt size 1200,800 font ',12'
 set title 'Cong Reps by State 2010'
-#set style fill solid 0.2
 set grid
 set ylabel "Reps"
 #set logscale y
 #set border 2+1
 set tics nomirror
 unset xtics
-stats 'ecoll.gpdat' using 2 name 'pop' noout
-stats 'ecoll.gpdat' using 3 name 'reps' noout
+stats 'elcoll.gpdat' using 2 name 'pop' noout
+stats 'elcoll.gpdat' using 3 name 'reps' noout
 xmax = pop_records
 set xrange [0:xmax+1]
-pop_tot = pop_sum
-reps_tot = reps_sum
-#set logscale y
-#plot [0:51][.001:.2] 'elcoll.gpdat' using ($0):($2/pop_sum) w boxes notitle, \
-#            '' u ($0):(($2/pop_sum*100)*1.1):1 labels notitle
-#plot  'elcoll.gpdat' using ($0):($2/pop_sum*100) w boxes fill pattern 4 title "%Pop", \
-#            '' u ($0):($3/reps_sum*100) w boxes fill pattern 5 title "%Reps", \
-#            '' u ($0):((($2>$3 ? $2 : $3)/pop_sum*100)+.3):1 w labels notitle
+#pop_tot = pop_sum
+#reps_tot = reps_sum
+
 set multiplot layout 2,1
 set bmargin at screen 0.26
-#plot  'elcoll.gpdat' using ($0):($3) w boxes linecolor 22 title "Reps", \
-#            '' u ($0):($4) w boxes linecolor 7 title "Reps deserved", \
-#            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',11' offset 0,0.3 notitle
-plot  'elcoll.gpdat' using ($0):($3) w boxes fill solid 0.75 linecolor 22 title "Reps", \
-            '' u ($0):($4) w boxes fill solid 0.25 linecolor 7 title "Reps deserved", \
+
+plot  'elcoll.gpdat' using ($0):($3) w boxes fill transparent pattern 4 lc 15 title "Reps", \
+            '' u ($0):($4) w boxes fill transparent pattern 5 lc 11 title "Reps deserved", \
             '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',10' offset 0,0.3 notitle
 set tmargin at screen 0.22
 set bmargin at screen 0.03
 set notitle
 set ylabel 'Excess'
 set yrange [-0.8:0.8]
-plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 border notitle, \
+plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 border -1 notitle, \
+                 '' u($0):(($5>0 ? ($5)+.1 : ($5)-.1)):1 w labels font ',10' notitle
+unset multiplot
+#
+pause -1 "Hit return to continue--"
+##
+set multiplot layout 2,1
+set bmargin at screen 0.26
+set yrange [*:*]
+set ylabel "Reps"
+
+plot  'elcoll.gpdat' using ($0):($3) w boxes fill transparent solid 0.15 lc 7 title "Reps", \
+            '' u ($0):($4) w boxes fill transparent solid 0.35 lc 3 title "Reps deserved", \
+            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',10' offset 0,0.3 notitle
+set tmargin at screen 0.22
+set bmargin at screen 0.03
+set notitle
+set ylabel 'Excess'
+set yrange [-0.8:0.8]
+plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 lc 2  notitle, \
                  '' u($0):(($5>0 ? ($5)+.1 : ($5)-.1)):1 w labels font ',10' notitle
 unset multiplot
 #pause -1 "Hit return to continue--"
+

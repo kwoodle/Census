@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="PlotEcoll" type="BashConfigurationType" factoryName="Bash">
+    <module name="Census" />
+    <option name="INTERPRETER_OPTIONS" value="--persist" />
+    <option name="INTERPRETER_PATH" value="/usr/bin/gnuplot" />
+    <option name="PROJECT_INTERPRETER" value="false" />
+    <option name="WORKING_DIRECTORY" value="" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="elcoll.gplt" />
+    <option name="PARAMETERS" value="" />
+    <method v="2" />
+  </configuration>
+</component>

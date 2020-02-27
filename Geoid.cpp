@@ -1,7 +1,7 @@
 //
 // Created by kwoodle on 4/24/18.
 //
-// Get data for a geoID form Census Reporter
+// Get data for a geoID from Census Reporter
 // !! Elecoral Districts, i.e. Census Voting Districts, are only? available in
 // decenial, 2000, 2010, Not in American Community Survey.
 
@@ -35,7 +35,9 @@ int main(int argc, char *argv[]) {
         curlm.load(urls);
         ResVec results = curlm.do_perform(urls);
 
-        // using CURLMap = std::map<CURL*, tuple<URL, FILE*, DocFile>>;
+        //?? using CURLMap = std::map<CURL*, tuple<URL, FILE*, DocFile>>;
+        // using Resp = pair<URL, DocFile>;
+        // using ResVec = vector<Resp>;
         for (auto &e : results) {
             auto u = e.first;
             auto d = e.second;

@@ -1,41 +1,40 @@
 #!/usr/bin/gnuplot
 #
+# As in elcoll.gplt but for 2018 population estimate
 #code pop	rep_actual reps_deserved rep_excess		pop_2018		deserved_2018 excess_2018
 #CA 37341989		53		52.5376		0.462376		39557045		52.5948		0.40517
 #TX 25268418		36		35.5509		0.449062		28701845		38.1618		-2.16182
 #NY 19421055		27		27.3241		-0.324099		19542209		25.9832		1.01679
 
 set term qt size 1200,800 font ',12'
-set title 'Cong Reps by State 2010'
+set title 'Cong Reps by State 2018'
 set grid
 set ylabel "Reps"
 #set logscale y
 #set border 2+1
 set tics nomirror
 unset xtics
-stats 'elcoll.gpdat' using 2 name 'pop' noout
+stats 'elcoll.gpdat' using 6 name 'pop_2018' noout
 stats 'elcoll.gpdat' using 3 name 'reps' noout
 stats 'elcoll.gpdat' using 8 name 'excess' noout
+xmax = pop_2018_records
+set xrange [0:xmax+1]
 ymin = excess_min
 ymax = excess_max
 off = 0.1*(abs(ymax) + abs(ymin))
-
-xmax = pop_records
-set xrange [0:xmax+1]
-
 set multiplot layout 2,1
 set bmargin at screen 0.26
 
 plot  'elcoll.gpdat' using ($0):($3) w boxes fill transparent pattern 4 lc 15 title "Reps", \
-            '' u ($0):($4) w boxes fill transparent pattern 5 lc 11 title "Deserved", \
-            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',10' offset 0,0.3 notitle
+            '' u ($0):($7) w boxes fill transparent pattern 5 lc 11 title "Deserved per 2018 pop", \
+            '' u ($0):(($3>$7 ? $3 : $7)+.5):1 w labels font ',10' offset 0,0.3 notitle
 set tmargin at screen 0.22
 set bmargin at screen 0.03
 set notitle
 set ylabel 'Excess'
 set yrange [-2.7:2.7]
-plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 border -1 notitle, \
-                 '' u($0):(($5>0 ? ($5)+off : ($5)-off)):1 w labels font ',10' notitle
+plot 'elcoll.gpdat' using ($0):($8) w boxes fill solid 0.25 border -1 notitle, \
+                 '' u($0):(($8>0 ? ($8)+.4 : ($8)-.4)):1 w labels font ',10' notitle
 unset multiplot
 #
 pause -1 "Hit return to continue--"
@@ -48,15 +47,17 @@ set yrange [*:*]
 set ylabel "Reps"
 
 plot  'elcoll.gpdat' using ($0):($3) w boxes fill transparent solid 0.15 lc 7 title "Reps", \
-            '' u ($0):($4) w boxes fill transparent solid 0.35 lc 3 title "Deserved", \
-            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',10' offset 0,0.3 notitle
+            '' u ($0):($7) w boxes fill transparent solid 0.35 lc 3 title "Deserved per 2018 pop", \
+            '' u ($0):(($3>$7 ? $3 : $7)+.5):1 w labels font ',10' offset 0,0.3 notitle
+# second plot shorter
 set tmargin at screen 0.22
 set bmargin at screen 0.03
 set notitle
 set ylabel 'Excess'
 set yrange [-2.7:2.7]
-plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 lc 2  notitle, \
-                 '' u($0):(($5>0 ? ($5)+off : ($5)-off)):1 w labels font ',10' notitle
+set ytics 1
+plot 'elcoll.gpdat' using ($0):($8) w boxes fill solid 0.25 lc 2  notitle, \
+                 '' u($0):(($8>0 ? ($8)+off : ($8)-off)):1 w labels font ',10' notitle
 unset multiplot
 #pause -1 "Hit return to continue--"
 

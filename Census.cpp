@@ -33,7 +33,7 @@ int main() {
 
     // set third parameter to true to allow unregistered options
     // in config file.
-    store(parse_config_file(cfg, desc, true), vm);
+    po::store(parse_config_file(cfg, desc, true), vm);
     notify(vm);
     cfg.close();
     string do_build = vm["cfg.do_build"].as<string>();

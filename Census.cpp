@@ -120,8 +120,8 @@ int build_age_table(po::variables_map &vm) {
 //    for (auto c:colnames) {
 //        cout << c << "\n";
 //    }
-
-    drk::KSql kSql(service, user, pass);
+    drk::MySqlOptions opts;
+    drk::KSql kSql(opts);
     kSql.Execute("use " + database);
     kSql.Execute("drop table if exists " + table);
     const string notnul{" int NOT NULL,\n"};

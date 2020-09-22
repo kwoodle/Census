@@ -36,7 +36,8 @@ int main() {
 
     bool do_build = vm["cfg.do_build"].as<bool>();
     bool do_test = vm["cfg.do_build"].as<bool>();
-    drk::KSql kSql;
+    drk::MySqlOptions opts;
+    drk::KSql kSql(opts);
     kSql.Execute("use " + database);
     string hdr;
     const string csv_file = vm["files.csv_file"].as<string>();

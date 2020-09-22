@@ -49,8 +49,8 @@ int main() {
     for (int n : boost::irange(int_s1, int_s2)) {
         multipliers[n] = multiplier(n);
     }
-
-    drk::KSql kSql;
+    drk::MySqlOptions opts;
+    drk::KSql kSql(opts);
     kSql.Execute("use census");
 
     const string sql{R"%%(select t1.code, t2.population, t2.reps from state_names as t1

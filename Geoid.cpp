@@ -2,7 +2,7 @@
 // Created by kwoodle on 4/24/18.
 //
 // Get data for a geoID from Census Reporter
-// !! Elecoral Districts, i.e. Census Voting Districts, are only? available in
+// !! Electoral Districts, i.e. Census Voting Districts, are only? available in
 // decenial, 2000, 2010, Not in American Community Survey.
 
 #include "Geoid.h"

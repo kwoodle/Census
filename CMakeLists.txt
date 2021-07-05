@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
 include(/usr/local/lib/ktrade/cmake/ktrade-targets.cmake)
 
 # boost
-find_package(Boost 1.64 COMPONENTS system filesystem program_options)
+find_package(Boost 1.64 COMPONENTS system filesystem program_options date_time)
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(Census Census.cpp Census.h)
@@ -15,7 +15,7 @@ add_executable(Geoid Geoid.cpp Census.h)
 target_link_libraries(Geoid ${Boost_LIBRARIES})
 target_link_libraries(Geoid Ktrd)
 
-add_executable(ElectColl ElColl.cpp ElColl.h ecoll.gplt)
+add_executable(ElectColl ElColl.cpp ElColl.h)
 target_link_libraries(ElectColl ${Boost_LIBRARIES})
 target_link_libraries(ElectColl Ktrd)
 

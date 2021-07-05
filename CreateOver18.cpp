@@ -15,7 +15,8 @@ int main() {
     const string table = "apportion";
     const string database = "census";
 
-    drk::KSql kSql(service, user, pass);
+    drk::MySqlOptions opts;
+    drk::KSql kSql(opts);
     kSql.Execute("use " + database);
 
     const string csv_file = "/home/kwoodle/Documents/Census/data/SCPRC-EST2018-18+POP-RES.csv";

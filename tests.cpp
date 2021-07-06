@@ -56,7 +56,7 @@ int main() {
     const string sql{R"%%(select t1.code, t2.population, t2.reps from state_names as t1
 inner join apportion as t2 on t1.state = t2.state order by population desc;
 )%%"};
-    auto res0{kSql.ExcuteQuery(sql)};
+    auto res0{kSql.ExecuteQuery(sql)};
     set<State, decltype(StateCompare)> states0(StateCompare);
     while (res0->next()) {
         string c = res0->getString("code");
@@ -71,7 +71,7 @@ inner join apportion as t2 on t1.state = t2.state order by population desc;
 inner join apportion as t2 on t1.state = t2.state
 inner join over18_2018 as t3 on t2.state = t3.area order by TotRes desc;
 )%%"};
-    auto res{kSql.ExcuteQuery(sql3)};
+    auto res{kSql.ExecuteQuery(sql3)};
     set<State, decltype(StateCompare)> states(StateCompare);
     while (res->next()) {
         string c = res->getString("code");

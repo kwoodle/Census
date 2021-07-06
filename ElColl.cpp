@@ -81,7 +81,7 @@ int main() {
     string sql0{"select population, reps from "};
     sql0 += table_2010;
     sql0 += " where state = 'TOTAL1'";
-    auto res0 = kSql.ExcuteQuery(sql0);
+    auto res0 = kSql.ExecuteQuery(sql0);
     while (res0->next()) {
         total_pop = res0->getInt("population");
         total_reps = res0->getInt("reps");
@@ -91,7 +91,7 @@ int main() {
     string sql1{"select TotRes from "};
     sql1 += table_2018;
     sql1 += " where area = 'United States'";
-    auto res1 = kSql.ExcuteQuery(sql1);
+    auto res1 = kSql.ExecuteQuery(sql1);
     int uspop_2018{0};
     while (res1->next()) {
         uspop_2018 = res1->getInt("TotRes");
@@ -101,7 +101,7 @@ int main() {
 inner join apportion as t2 on t1.state = t2.state
 inner join over18_2018 as t3 on t2.state = t3.area order by population desc;
 )%%"};
-    auto res = kSql.ExcuteQuery(sql3);
+    auto res = kSql.ExecuteQuery(sql3);
     // output a row like code pop rep_act rep_excess rep_effective...
     const string ecolout{"../elcoll.gpdat"};
     ofstream ecollstrm{ecolout};

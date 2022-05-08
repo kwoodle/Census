@@ -35,7 +35,7 @@ int main() {
     const string database = vm["mysql.database"].as<string>();
 
     bool do_build = vm["cfg.do_build"].as<bool>();
-    bool do_test = vm["cfg.do_build"].as<bool>();
+    bool do_test = vm["cfg.do_test"].as<bool>();
     drk::MySqlOptions opts;
     drk::KSql kSql(opts);
     kSql.Execute("use " + database);
@@ -68,13 +68,22 @@ int main() {
         }
     }
     if (do_build) {
-        string load_data{"load data local infile '"};
-        load_data += csv_outfile + "\' ";
-        load_data += "replace into table " + table_2010;
-        load_data += " fields terminated by ';' ignore 1 lines";
-        cout << "sql for load data\n" << load_data << "\n";
-        kSql.Execute("truncate " + table_2010);
-        kSql.Execute(load_data);
+        kSql.Execute("use census");
+        kSql.Execute("drop table if exists `apportion`");
+        string create_connect_file {R"%%(
+        create table `apportion`
+(
+    `STATE`      VARCHAR(50) NOT NULL,
+    `POPULATION` INT         NOT NULL,
+    `REPS`       SMALLINT    NOT NULL,
+    `DELTA`      VARCHAR(5) DEFAULT NULL
+) ENGINE=CONNECT DEFAULT CHARSET=latin1 `table_type`=CSV `file_name`=')%%"
+        };
+        create_connect_file += csv_outfile ;
+        string create_connect_file_tail {R"%%(' `header`=1 `sep_char`=';')%%"};
+        create_connect_file += create_connect_file_tail;
+        cout<<"create_connect_file\n"<<create_connect_file<<endl;
+        kSql.Execute(create_connect_file);
     }
     int total_pop{0};
     int total_reps{0};

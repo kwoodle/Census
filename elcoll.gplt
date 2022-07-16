@@ -36,12 +36,14 @@ set ylabel 'Excess'
 set yrange [-2.7:2.7]
 plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 border -1 notitle, \
                  '' u($0):(($5>0 ? ($5)+off : ($5)-off)):1 w labels font ',10' notitle
-unset multiplot
+#unset multiplot
 #
 pause -1 "Hit return to continue--"
 ##
 ## try different fill pattern and colors
 ##
+#set title 'Cong Reps by State 2018'
+
 set multiplot layout 2,1
 set bmargin at screen 0.26
 set yrange [*:*]
@@ -58,5 +60,5 @@ set yrange [-2.7:2.7]
 plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 lc 2  notitle, \
                  '' u($0):(($5>0 ? ($5)+off : ($5)-off)):1 w labels font ',10' notitle
 unset multiplot
-#pause -1 "Hit return to continue--"
+pause -1 "Hit return to continue--"
 

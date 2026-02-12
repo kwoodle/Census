@@ -6,7 +6,7 @@
 #NY 19421055		27		27.3241		-0.324099		19542209		25.9832		1.01679
 
 set term qt size 1500,1000 font ',12'
-set title 'Cong Reps by State 2010'
+set title 'Cong Reps by State 2018'
 set grid
 set ylabel "Reps"
 #set logscale y

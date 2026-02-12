@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
 include(/usr/local/lib/ktrade/cmake/ktrade-targets.cmake)
 
 # boost
-find_package(Boost 1.64 COMPONENTS system filesystem program_options date_time)
+find_package(Boost 1.64 CONFIG COMPONENTS system filesystem program_options date_time)
 include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(Census Census.cpp Census.h)

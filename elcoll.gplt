@@ -5,7 +5,7 @@
 #TX 25268418		36		35.5509		0.449062		28701845		38.1618		-2.16182
 #NY 19421055		27		27.3241		-0.324099		19542209		25.9832		1.01679
 
-set term qt size 1200,800 font ',12'
+set term qt size 1500,1000 font ',12'
 set title 'Cong Reps by State 2010'
 set grid
 set ylabel "Reps"
@@ -28,14 +28,14 @@ set bmargin at screen 0.26
 
 plot  'elcoll.gpdat' using ($0):($3) w boxes fill transparent pattern 4 lc 15 title "Reps", \
             '' u ($0):($4) w boxes fill transparent pattern 5 lc 11 title "Deserved", \
-            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',10' offset 0,0.3 notitle
+            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',9' offset 0,0.3 notitle
 set tmargin at screen 0.22
 set bmargin at screen 0.03
 set notitle
 set ylabel 'Excess'
 set yrange [-2.7:2.7]
 plot 'elcoll.gpdat' using ($0):($5) w boxes fill solid 0.25 border -1 notitle, \
-                 '' u($0):(($5>0 ? ($5)+off : ($5)-off)):1 w labels font ',10' notitle
+                 '' u($0):(($5>0 ? ($5)+off : ($5)-off)):1 w labels font ',9' notitle
 #unset multiplot
 #
 pause -1 "Hit return to continue--"
@@ -51,7 +51,7 @@ set ylabel "Reps"
 
 plot  'elcoll.gpdat' using ($0):($3) w boxes fill transparent solid 0.15 lc 7 title "Reps", \
             '' u ($0):($4) w boxes fill transparent solid 0.35 lc 3 title "Deserved", \
-            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',10' offset 0,0.3 notitle
+            '' u ($0):(($3>$4 ? $3 : $4)+.5):1 w labels font ',9' offset 0,0.3 notitle
 set tmargin at screen 0.22
 set bmargin at screen 0.03
 set notitle

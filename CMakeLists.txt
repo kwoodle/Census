@@ -7,8 +7,11 @@ include(/usr/local/lib/ktrade/cmake/ktrade-targets.cmake)
 find_package(Boost 1.64 CONFIG COMPONENTS system filesystem program_options date_time)
 include_directories(${Boost_INCLUDE_DIRS})
 
+#see https://json.nlohmann.me/api/json/
+
+find_package(nlohmann_json REQUIRED)
 add_executable(Census Census.cpp Census.h)
-target_link_libraries(Census ${Boost_LIBRARIES})
+target_link_libraries(Census ${Boost_LIBRARIES} nlohmann_json::nlohmann_json)
 target_link_libraries(Census Ktrd)
 
 add_executable(Geoid Geoid.cpp Census.h)
